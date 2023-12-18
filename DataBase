@@ -1,0 +1,115 @@
+-- Creación de la base de datos y uso
+CREATE DATABASE Kasitalovers;
+USE Kasitalovers;
+
+-- Creación de la tabla Categorias
+CREATE TABLE Categorias (
+    Id_Categoria INT PRIMARY KEY,
+    Nombre_Categoria VARCHAR(50) NOT NULL
+);
+
+-- Inserción de datos en la tabla Categorias
+INSERT INTO Categorias (Id_Categoria, Nombre_Categoria) VALUES
+(1, 'Categoría 1'),
+(2, 'Categoría 2'),
+(3, 'Categoría 3');
+
+-- Creación de la tabla Platos
+CREATE TABLE Platos (
+    Id_Platos INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre_Platos VARCHAR(50) NOT NULL,
+    Ingredientes TEXT,
+    Precio DECIMAL(10, 2) NOT NULL,
+    Id_Categoria INT,
+    FOREIGN KEY (Id_Categoria) REFERENCES Categorias(Id_Categoria)
+);
+
+-- Inserción de datos en la tabla Platos
+INSERT INTO Platos (Id_Platos, Nombre_Platos, Precio, Ingredientes, Id_Categoria) VALUES
+(0, 'Hamburguesa de Carne', 300.00, 'Carne de res, lechuga, tomate, queso', 1),
+(0, 'Pollo grande frito', 400.00, 'Pollo, condimentos', 2),
+(0, 'Papas grandes fritas', 500.00, 'Papas, aceite, sal', 3),
+(0, 'Hamburguesa XL', 600.00, 'Carne de res, lechuga, tomate, queso, doble carne', 1),
+(0, 'Hamburguesa de Carne', 700.00, 'Carne de res, lechuga, tomate, queso', 1),
+(0, 'Pollo grande frito', 800.00, 'Pollo, condimentos', 2),
+(0, 'Papas grandes fritas', 900.00, 'Papas, aceite, sal', 3),
+(0, 'Hamburguesa XL', 1000.00, 'Carne de res, lechuga, tomate, queso, doble carne', 1);
+
+-- Creacion de la tabla bebidas
+create table Bebidas(                    
+id_bebidas INT primary key,
+Nombre_bebidas varchar(50) not null,
+Sabores text,
+Precio DECIMAL(10, 2) not null,
+ID_Categoria INT,
+ FOREIGN KEY (ID_Categoria) REFERENCES Categorias(ID_Categoria)
+
+);
+
+-- Refrescos
+insert into Bebidas(id_bebidas, Nombre_bebidas, Sabores, Precio, ID_Categoria) values
+(1, 'Refresco de Cola', 'Cola', 50.00, 1),
+(2, 'Refresco de Naranja', 'Naranja', 45.00, 1),
+(3, 'Refresco de Limón', 'Limón', 45.00, 1),
+(4, 'Refresco de Uva', 'Uva', 50.00, 1);
+
+-- Batidas
+insert into Bebidas(id_bebidas, Nombre_bebidas, Sabores, Precio, ID_Categoria) values
+(5, 'Batida de Fresa', 'Fresa', 70.00, 2),
+(6, 'Batida de Piña', 'Piña', 65.00, 2),
+(7, 'Batida de Mango', 'Mango', 70.00, 2),
+(8, 'Batida de Coco', 'Coco', 75.00, 2);
+
+-- Jugos Naturales
+insert into Bebidas(id_bebidas, Nombre_bebidas, Sabores, Precio, ID_Categoria) values
+(9, 'Jugo de Naranja Natural', 'Naranja', 60.00, 3),
+(10, 'Jugo de Guayaba Natural', 'Guayaba', 65.00, 3),
+(11, 'Jugo de Piña Natural', 'Piña', 60.00, 3),
+(12, 'Jugo de Toronja Natural', 'Toronja', 65.00, 3);
+
+-- Creacion de la tabla Guarniciones
+create table Guarniciones(
+id_guarniciones INT primary key,
+Nombre_guarniciones varchar(50) not null,
+ingredientes text,
+Precio DECIMAL(10, 2) not null,
+ID_Categoria INT,
+ FOREIGN KEY (ID_Categoria) REFERENCES Categorias(ID_Categoria)
+
+);
+
+-- insercion de Guarniciones 
+insert into Guarniciones(id_guarniciones, Nombre_guarniciones, ingredientes, Precio, ID_Categoria) values
+(1, 'Papas Fritas', 'Papas, aceite vegetal, sal', 70.00, 3),
+(2, 'Tostones', 'Plátanos verdes, aceite, sal', 75.50, 3),
+(3, 'Yuca Frita', 'Yuca, aceite, ajo, sal', 80.25, 3),
+(4, 'Ensalada César', 'Lechuga, pollo, croutones, aderezo César', 90.75, 3);
+
+
+
+-- Creación de la tabla Pedidos
+CREATE TABLE Pedidos (
+    Id_Pedidos INT AUTO_INCREMENT PRIMARY KEY,
+    Descripcion TEXT,
+    Cantidad INT,
+    Total DECIMAL(10, 2) NOT NULL,
+    Fecha_pedidos DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Id_Platos INT,
+    FOREIGN KEY (Id_Platos) REFERENCES Platos(Id_Platos)
+);
+
+-- Inserción de datos en la tabla Pedidos
+INSERT INTO Pedidos (Descripcion, Cantidad, Total, Id_Platos) VALUES
+('Pedido 1', 2, 31.98, 1),
+('Pedido 2', 1, 12.50, 2),
+('Pedido 3', 3, 56.25, 3);
+
+-- Inserción de datos en la tabla usuarios
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+INSERT INTO usuarios (username, password) VALUES
+('usuario1','123456' );
